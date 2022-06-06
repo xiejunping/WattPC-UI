@@ -1,0 +1,15 @@
+{
+  "name": "watt-pc-ui",
+  "version": "1.0.0",
+  "description": "watt-framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:ChuPiJiang/watt-pc-ui.git"
+  },
+  "author": "417663733@qq.com",
+  "license": "ISC"
+}

@@ -1,5 +1,6 @@
 export * from './components'
 import * as components from './components'
+import './css/iconfont.css'
 
 const PcWattUI = {
   ...components

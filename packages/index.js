@@ -1,19 +1,19 @@
+export * from './components'
 import * as components from './components'
+import './css/iconfont.css'
 
 const PcWattUI = {
   ...components
 }
 
-const install = (Vue, opts = {}) => {
-  // if (install.installed) return
+const install = (app, opts = {}) => {
+  if (install.installed) return
 
   Object.keys(PcWattUI).forEach(key => {
-    Vue.component(key.name, PcWattUI[key]);
+    app.component(key, PcWattUI[key]);
   })
 }
 
 export default {
   install
 }
-
-export * from './components'

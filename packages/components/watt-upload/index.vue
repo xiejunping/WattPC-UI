@@ -20,13 +20,7 @@
       <template v-if="file.type === 'file'">
       </template>
     </div>
-    <div v-show="!disabledInfo" class="c-message">
-      <i class="icon-font"></i>
-      <span class="c-info">格式支持 {{fileTypeStr}}</span>
-    </div>
-    <div v-if="msg" class="c-col-msg">
-      <span>{{msg}}</span>
-    </div>
+
   </div>
 </template>
 <script>
@@ -54,6 +48,7 @@ export default defineComponent({
     }
   },
   setup (props, {emit}) {
+    console.log(ref)
     return {
 
     }

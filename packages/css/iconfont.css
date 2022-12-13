@@ -1,0 +1,147 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3824242 */
+  src: url('iconfont.woff2?t=1670927239879') format('woff2'),
+       url('iconfont.woff?t=1670927239879') format('woff'),
+       url('iconfont.ttf?t=1670927239879') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-watt-check-circle:before {
+  content: "\e77d";
+}
+
+.icon-watt-warning-circle:before {
+  content: "\e785";
+}
+
+.icon-watt-message:before {
+  content: "\e78a";
+}
+
+.icon-watt-check-square:before {
+  content: "\e7a8";
+}
+
+.icon-watt-border:before {
+  content: "\e7a9";
+}
+
+.icon-watt-info-circle-fill:before {
+  content: "\e847";
+}
+
+.icon-watt-check-square-fill:before {
+  content: "\e84b";
+}
+
+.icon-watt-reload:before {
+  content: "\e788";
+}
+
+.icon-watt-user:before {
+  content: "\e7ae";
+}
+
+.icon-watt-team:before {
+  content: "\e7af";
+}
+
+.icon-watt-delete:before {
+  content: "\e7c3";
+}
+
+.icon-watt-filter:before {
+  content: "\e7c7";
+}
+
+.icon-watt-scan:before {
+  content: "\e7d4";
+}
+
+.icon-watt-camera:before {
+  content: "\e7d7";
+}
+
+.icon-watt-cloud-upload:before {
+  content: "\e7d9";
+}
+
+.icon-watt-cloud-download:before {
+  content: "\e7da";
+}
+
+.icon-watt-image:before {
+  content: "\e7de";
+}
+
+.icon-watt-right:before {
+  content: "\e7eb";
+}
+
+.icon-watt-left:before {
+  content: "\e7ec";
+}
+
+.icon-watt-up:before {
+  content: "\e7ed";
+}
+
+.icon-watt-down:before {
+  content: "\e7ee";
+}
+
+.icon-watt-upload:before {
+  content: "\e7ef";
+}
+
+.icon-watt-indent:before {
+  content: "\e7f3";
+}
+
+.icon-watt-outdent:before {
+  content: "\e7f4";
+}
+
+.icon-watt-menu:before {
+  content: "\e7f5";
+}
+
+.icon-watt-unorderedlist:before {
+  content: "\e7f6";
+}
+
+.icon-watt-close:before {
+  content: "\e7fc";
+}
+
+.icon-watt-desktop:before {
+  content: "\e842";
+}
+
+.icon-watt-minus-circle-fill:before {
+  content: "\e844";
+}
+
+.icon-watt-close-circle-fill:before {
+  content: "\e845";
+}
+
+.icon-watt-plus:before {
+  content: "\e8fe";
+}
+
+.icon-watt-eyeclose-fill:before {
+  content: "\e8ff";
+}
+
+.icon-watt-eye-close:before {
+  content: "\e900";
+}
+

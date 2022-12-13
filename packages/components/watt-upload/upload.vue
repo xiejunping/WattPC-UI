@@ -3,13 +3,13 @@
     <div class="m-upload-default" :class="{'m-upload-disabled': disabled}" @click="handleClick">
       <slot v-if="0" name="uploadIcon"></slot>
       <div v-else-if="mediaType === 'file'" class="m-upload-itemfile">
-        <slot v-if="1" name="icon"></slot>
-        <i v-else class=""></i>
+        <slot v-if="0" name="icon"></slot>
+        <i v-else class="iconfont icon-watt-upload"></i>
         <span>{{upTxt}}</span>
       </div>
       <div v-else-if="mediaType === 'image'" class="m-upload-itemimage">
-        <slot v-if="1" name="icon"></slot>
-        <i v-else class=""></i>
+        <slot v-if="0" name="icon"></slot>
+        <i v-else class="iconfont icon-watt-plus"></i>
         <span>{{upTxt}}</span>
       </div>
     </div>
@@ -163,6 +163,11 @@ export default defineComponent({
     &.m-upload-disabled {
       .m-upload-itemfile, .m-upload-itemimage {
         cursor: not-allowed;
+        background-color: #f5f5f5;
+        &:hover {
+          border-color: #d9d9d9;
+          color: #666;
+        }
       }
     }
     .m-upload-itemfile {
@@ -177,6 +182,7 @@ export default defineComponent({
       align-content: center;
       width: 80px;
       height: 80px;
+      background-color: #f8f8f8;
     }
 
 

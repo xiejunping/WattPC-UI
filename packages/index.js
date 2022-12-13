@@ -1,4 +1,4 @@
-// export * from './components'
+export * from './components'
 import * as components from './components'
 
 const PcWattUI = {
@@ -8,9 +8,7 @@ const PcWattUI = {
 const install = (app, opts = {}) => {
   if (install.installed) return
 
-  console.log(PcWattUI, 'PcWattUI')
   Object.keys(PcWattUI).forEach(key => {
-    console.log(key)
     app.component(key, PcWattUI[key]);
   })
 }

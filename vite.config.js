@@ -20,6 +20,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['vue', 'axios', 'js-cookie'],
       output: {
+        exports: 'named',
         globals: {
           'vue': 'Vue',
           'axios': 'axios',

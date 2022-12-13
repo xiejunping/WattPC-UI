@@ -13,10 +13,19 @@ export default defineConfig({
     }
   },
   build: {
-    sourcemap: false,
     lib: {
       entry: './packages/index.js',
-      name: 'watt-pc-ui'
+      name: 'wattpc-ui'
+    },
+    rollupOptions: {
+      external: ['vue', 'axios', 'js-cookie'],
+      output: {
+        globals: {
+          'vue': 'Vue',
+          'axios': 'axios',
+          'js-cookie': 'Cookies'
+        }
+      }
     }
   }
 })

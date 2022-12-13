@@ -54,6 +54,7 @@ export default defineComponent({
     }
   },
   setup (props, {emit}) {
+    console.log(ref)
     return {
 
     }

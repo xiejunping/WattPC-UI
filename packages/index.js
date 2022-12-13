@@ -1,19 +1,20 @@
+// export * from './components'
 import * as components from './components'
 
 const PcWattUI = {
   ...components
 }
 
-const install = (Vue, opts = {}) => {
-  // if (install.installed) return
+const install = (app, opts = {}) => {
+  if (install.installed) return
 
+  console.log(PcWattUI, 'PcWattUI')
   Object.keys(PcWattUI).forEach(key => {
-    Vue.component(key.name, PcWattUI[key]);
+    console.log(key)
+    app.component(key, PcWattUI[key]);
   })
 }
 
 export default {
   install
 }
-
-export * from './components'

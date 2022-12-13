@@ -1,3 +1,3 @@
-import Upload from '../watt-upload/upload.vue'
+import IUpload from '../watt-upload/upload.vue'
 
-export default Upload
+export default IUpload

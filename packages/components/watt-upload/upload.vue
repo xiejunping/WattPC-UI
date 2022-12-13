@@ -52,7 +52,7 @@ const base64ToBlob = function(code) {
 }
 
 export default defineComponent({
-  name: 'upload',
+  name: 'i-upload',
   emits: ['upload'],
   props: {
     busType: {
@@ -135,12 +135,16 @@ export default defineComponent({
       const uploadQueues = files.map(async (rawFile) => {
         const formData = new FormData()
         const { file, content, width, height } = rawFile
-        const { key, token } = await axios.post('https://api.jsvue.cn/user-center/watt/preUploadToken', {
+        const { data, status } = await axios.post('https://api.jsvue.cn/user-center/watt/preUploadToken', {
           businessType: busType.value,
           fileKey: file.name,
           deviceId: Cookies.get('CLIENT-ID')
+        }, {
+          withCredentials: true,
+          headers: { 'X-XSRF-TOKEN': 'x-basement-token' }
         })
-        console.log(key, token)
+        if (status !== 200 || data.code !== 0) return
+        const { data: { key, token }} = data || {data: {}}
         formData.append('file', file)
         formData.append('key', key)
         formData.append('token', token)
@@ -207,7 +211,7 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="less" scoped>
+<style lang="less">
 
 .m-upload {
   display: inline-block;
@@ -219,7 +223,7 @@ export default defineComponent({
       border: 1px solid #d9d9d9;
       color: #666;
       font-size: 14px;
-      padding: 4px 15px;
+      padding: 4px 8px;
       border-radius: 3px;
       background-color: #fff;
       cursor: pointer;
@@ -253,8 +257,8 @@ export default defineComponent({
       flex-direction: column;
       justify-content: center;
       align-content: center;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       background-color: #f8f8f8;
       i.iconfont {
         font-size: 16px;

@@ -1,23 +1,27 @@
 <template>
   <div class="m-upload">
     <div class="m-upload-default" :class="{'m-upload-disabled': disabled}" @click="handleClick">
-      <slot v-if="0" name="uploadIcon"></slot>
-      <div v-else-if="mediaType === 'file'" class="m-upload-itemfile">
-        <slot v-if="0" name="icon"></slot>
-        <i v-else class="iconfont icon-watt-upload"></i>
-        <span v-if="upTxt">{{upTxt}}</span>
-      </div>
-      <div v-else-if="mediaType === 'image'" class="m-upload-itemimage">
-        <slot v-if="0" name="icon"></slot>
-        <i v-else class="iconfont icon-watt-plus"></i>
-        <span v-if="upTxt">{{upTxt}}</span>
-      </div>
+      <slot name="uploadIcon">
+        <div v-if="mediaType === 'file'" class="m-upload-itemfile">
+          <slot name="icon">
+            <i class="iconfont icon-watt-upload" />
+          </slot>
+          <span v-if="upTxt">{{upTxt}}</span>
+        </div>
+        <div v-else-if="mediaType === 'image'" class="m-upload-itemimage">
+          <slot name="icon">
+            <i class="iconfont icon-watt-plus" />
+          </slot>
+          <span v-if="upTxt">{{upTxt}}</span>
+        </div>
+      </slot>
 
-      <slot v-if="0" name="tip"></slot>
-      <div v-else-if="tipTxt" class="c-message">
-        <i class="iconfont icon-watt-warning-circle"></i>
-        <span class="c-info">{{tipTxt}}</span>
-      </div>
+      <slot name="tip">
+        <div v-if="tipTxt" class="c-message">
+          <i class="iconfont icon-watt-warning-circle" />
+          <span class="c-info">{{tipTxt}}</span>
+        </div>
+      </slot>
       <div v-if="msg" class="c-col-msg">
         <span>{{msg}}</span>
       </div>

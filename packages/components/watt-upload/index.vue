@@ -20,7 +20,16 @@
       <template v-if="file.type === 'file'">
       </template>
     </div>
+      <slot name="tip">
+        <div v-if="tipTxt" class="c-message">
+          <i class="iconfont icon-watt-warning-circle" />
+          <span class="c-info">{{tipTxt}}</span>
+        </div>
+      </slot>
 
+      <div v-if="msg" class="c-col-msg">
+        <span>{{msg}}</span>
+      </div>
   </div>
 </template>
 <script>
@@ -28,6 +37,10 @@ import { ref, defineComponent } from 'vue'
 export default defineComponent({
   name: 'watt-upload',
   props: {
+    value: {
+      type: Array,
+      default: () => ([])
+    },
     mediaType: {
       type: String,
       default: 'image'
@@ -49,8 +62,9 @@ export default defineComponent({
   },
   setup (props, {emit}) {
     console.log(ref)
+    const msg = ref('')
     return {
-
+      msg,
     }
   }
 })

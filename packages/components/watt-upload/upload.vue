@@ -15,16 +15,6 @@
           <span v-if="upTxt">{{upTxt}}</span>
         </div>
       </slot>
-
-      <slot name="tip">
-        <div v-if="tipTxt" class="c-message">
-          <i class="iconfont icon-watt-warning-circle" />
-          <span class="c-info">{{tipTxt}}</span>
-        </div>
-      </slot>
-      <div v-if="msg" class="c-col-msg">
-        <span>{{msg}}</span>
-      </div>
     </div>
 
     <input v-if="multiple" ref="input" type="file" class="w-input" :accept="accept" multiple @change="onChange" />
@@ -57,7 +47,7 @@ const base64ToBlob = function(code) {
 
 export default defineComponent({
   name: 'i-upload',
-  emits: ['upload'],
+  emits: ['upload', 'error'],
   props: {
     busType: {
       type: Number,
@@ -92,7 +82,6 @@ export default defineComponent({
   },
   setup (props, { emit }) {
     const input = ref(null)
-    const msg = ref('')
     const { busType, mediaType, accept, upTxt, tipTxt, fileRules, multiple, maxLength, disabled } = toRefs(props)
     const { width, height, maxSize } = fileRules.value
 
@@ -119,7 +108,7 @@ export default defineComponent({
     const onAfterRead = (files) => {
       console.log(files, 'filse')
       if (multiple.value && maxLength.value < files.length) {
-        msg.value = `请选择不超过 ${maxLength.value} 个文件`
+        emit('error', `请选择不超过 ${maxLength.value} 个文件`)
         uploaded()
         return
       }
@@ -127,12 +116,12 @@ export default defineComponent({
       const someNotWidth = files.some(file => file.width !== width)
       const someNotHeight = files.some(file => file.height !== height)
       if (maxSize && someNotSize) {
-        msg.value = `请选择小于 ${fileSize(maxSize)} 的文件`
+        emit('error', `请选择小于 ${fileSize(maxSize)} 的文件`)
         uploaded()
         return
       }
       if ((width && someNotWidth) || (height && someNotHeight)) {
-        msg.value = `请选择尺寸为 ${width} x ${height} 图片`
+        emit('error', `请选择尺寸为 ${width} x ${height} 图片`)
         uploaded()
         return
       }
@@ -203,7 +192,6 @@ export default defineComponent({
     }
     return {
       input,
-      msg,
       mediaType,
       accept,
       upTxt: upTxt.value || (upTxt.value === undefined ? (mediaType.value === 'image'? '上传图片' : '上传文件') : ''),

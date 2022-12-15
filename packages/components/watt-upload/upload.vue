@@ -1,6 +1,10 @@
 <template>
   <div class="m-upload">
-    <div class="m-upload-default" :class="{'m-upload-disabled': disabled}" @click="handleClick">
+    <div v-if="loading" class="m-upload-loading" :class="{'itemimage': mediaType === 'image', 'itemfile': mediaType === 'file'}">
+      <i class="iconfont icon-watt-loading" />
+      <span>上传中</span>
+    </div>
+    <div class="m-upload-default" :class="{'m-upload-disabled': disabled, 'm-upload-error': erropStat}" @click="handleClick">
       <slot name="uploadIcon">
         <div v-if="mediaType === 'file'" class="m-upload-itemfile">
           <slot name="icon">
@@ -82,6 +86,8 @@ export default defineComponent({
   },
   setup (props, { emit }) {
     const input = ref(null)
+    const loading = ref(false)
+    const erropStat = ref(false)
     const { busType, mediaType, accept, upTxt, tipTxt, fileRules, multiple, maxLength, disabled } = toRefs(props)
     const { width, height, maxSize } = fileRules.value
 
@@ -106,8 +112,8 @@ export default defineComponent({
       })
     }
     const onAfterRead = (files) => {
-      console.log(files, 'filse')
       if (multiple.value && maxLength.value < files.length) {
+        erropStat.value = true
         emit('error', `请选择不超过 ${maxLength.value} 个文件`)
         uploaded()
         return
@@ -116,11 +122,13 @@ export default defineComponent({
       const someNotWidth = files.some(file => file.width !== width)
       const someNotHeight = files.some(file => file.height !== height)
       if (maxSize && someNotSize) {
+        erropStat.value = true
         emit('error', `请选择小于 ${fileSize(maxSize)} 的文件`)
         uploaded()
         return
       }
       if ((width && someNotWidth) || (height && someNotHeight)) {
+        erropStat.value = true
         emit('error', `请选择尺寸为 ${width} x ${height} 图片`)
         uploaded()
         return
@@ -156,22 +164,24 @@ export default defineComponent({
             return rawFile
           })
       })
-      // todo 上传中
+      loading.value = true
       Promise.all(uploadQueues)
         .then((data) => {
           console.log(data)
-          // todo 上传结束
+          loading.value = false
           emit('upload', data)
           uploaded()
         })
         .catch((err) => {
           console.log(err)
+          loading.value = false
           uploaded()
         })
     }
     const handleClick = () => {
       if (disabled.value) return
       input.value.click()
+      erropStat.value = false
     }
     const onChange = (event) => {
       let { files } = event.target
@@ -191,7 +201,9 @@ export default defineComponent({
       })
     }
     return {
+      loading,
       input,
+      erropStat,
       mediaType,
       accept,
       upTxt: upTxt.value || (upTxt.value === undefined ? (mediaType.value === 'image'? '上传图片' : '上传文件') : ''),
@@ -207,9 +219,40 @@ export default defineComponent({
 
 .m-upload {
   display: inline-block;
+  position: relative;
+  .m-upload-loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 12px;
+      color: #40a9ff;
+    }
+    &.itemimage {
+      flex-direction: column;
+      width: 100px;
+      height: 100px;
+      i {
+        font-size: 18px;
+      }
+    }
+    &.itemfile {
+      span {
+        padding-left: 8px;
+      }
+    }
+  }
   .m-upload-default {
     position: relative;
-
     .m-upload-itemfile, .m-upload-itemimage {
       box-shadow: 0 2px #00000004;
       border: 1px solid #d9d9d9;
@@ -234,6 +277,12 @@ export default defineComponent({
         }
       }
     }
+    &.m-upload-error {
+      .m-upload-itemfile, .m-upload-itemimage  {
+        border-color: #ff4501;
+        color: #ff4501;
+      }
+    }
     .m-upload-itemfile {
       line-height: 22px;
       text-align: center;
@@ -242,7 +291,6 @@ export default defineComponent({
         margin-right: 8px;
       }
     }
-
     .m-upload-itemimage {
       border-style: dashed;
       display: flex;
@@ -253,7 +301,7 @@ export default defineComponent({
       height: 100px;
       background-color: #f8f8f8;
       i.iconfont {
-        font-size: 16px;
+        font-size: 22px;
         line-height: 20px;
       }
     }
@@ -262,6 +310,17 @@ export default defineComponent({
   }
   .w-input {
     visibility: hidden;
+    position: absolute;
+  }
+}
+.iconfont.icon-watt-loading {
+  animation: allrotate 1.2s linear infinite;
+  -webkit-animation: allrotate 1.2s linear infinite;
+  display: inline-block;
+}
+@keyframes allrotate {
+  100% {
+    transform: rotate(360deg);
   }
 }
 </style>

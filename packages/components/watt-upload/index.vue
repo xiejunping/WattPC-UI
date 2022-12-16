@@ -9,12 +9,15 @@
         </div>
       </upload>
       <i-upload
-        v-else
+        v-if="maxLength > value.length"
         :media-type="mediaType"
         :bus-type="busType"
-        :up-txt="upTxt">
-
-      </i-upload>
+        :accept="accept"
+        :file-rules="fileRules"
+        :up-txt="upTxt"
+        :multiple="multiple"
+        :max-length="maxLength"
+        :disabled="disabled" />
 
       <template v-if="file.type === 'image'">
 
@@ -74,7 +77,10 @@ export default defineComponent({
     upTxt: {
       type: String,
       default: '上传图片'
-    }
+    },
+    tipTxt: {
+      type: String
+    },
   },
   setup (props, {emit}) {
     console.log(ref)

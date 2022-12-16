@@ -73,9 +73,6 @@ export default defineComponent({
     upTxt: {
       type: String
     },
-    tipTxt: {
-      type: String
-    },
     fileRules: {
       type: Object,
       default: () => ({})
@@ -88,7 +85,7 @@ export default defineComponent({
     const input = ref(null)
     const loading = ref(false)
     const erropStat = ref(false)
-    const { busType, mediaType, accept, upTxt, tipTxt, fileRules, multiple, maxLength, disabled } = toRefs(props)
+    const { busType, mediaType, accept, upTxt, fileRules, multiple, maxLength, disabled } = toRefs(props)
     const { width, height, maxSize } = fileRules.value
 
     const uploaded = () => {
@@ -207,7 +204,6 @@ export default defineComponent({
       mediaType,
       accept,
       upTxt: upTxt.value || (upTxt.value === undefined ? (mediaType.value === 'image'? '上传图片' : '上传文件') : ''),
-      tipTxt,
       multiple,
       onChange,
       handleClick

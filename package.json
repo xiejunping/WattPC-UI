@@ -17,8 +17,7 @@
     "ant-design-vue": "^3.2.15"
   },
   "dependencies": {
-    "vue": "^3.2.13",
-    "ant-design-vue": "^3.2.15"
+    "vue": "^3.2.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.2.0",

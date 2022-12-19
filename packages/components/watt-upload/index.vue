@@ -1,13 +1,10 @@
 <template>
   <div class="upload-image">
     <div class="c-wrap">
-      <upload v-if="maxLength > 1" class="c-init" action="" :before-upload="preUpload">
-        <div class="min-column">
-          <i class="icon-font add"></i>
-          <span>{{upTxt}}</span>
-          <span v-if="rules" class="m-image-rule">{{rules}}</span>
-        </div>
-      </upload>
+      <!-- 图片上传 -->
+      <template v-if="file.type === 'image'">
+        <a-image :width="80" src="" fallback=""></a-image>
+      </template>
       <i-upload
         v-if="maxLength > value.length"
         :media-type="mediaType"
@@ -19,18 +16,22 @@
         :max-length="maxLength"
         :disabled="disabled" />
 
-      <template v-if="file.type === 'image'">
-
-
-      </template>
+      <!-- 文件上传 -->
       <template v-if="file.type === 'file'">
-
+        <div>
+          <i class="iconfont icon-watt-delete"></i>
+          <i class="iconfont icon-watt-attachment"></i>
+          <span></span>
+        </div>
       </template>
     </div>
     <slot name="tip">
       <div v-if="tipTxt" class="c-message">
         <i class="iconfont icon-watt-warning-circle" />
         <span class="c-info">{{tipTxt}}</span>
+      </div>
+      <div v-else-if="rules" class="">
+        <span class="m-image-rule">{{rules}}</span>
       </div>
     </slot>
 

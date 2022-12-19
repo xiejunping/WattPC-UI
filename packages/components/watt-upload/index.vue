@@ -2,8 +2,12 @@
   <div class="upload-image">
     <div class="c-wrap">
       <!-- 图片上传 -->
-      <template v-if="file.type === 'image'">
-        <a-image :width="80" src="" fallback=""></a-image>
+      <template v-if="mediaType === 'image'">
+        <a-image
+          v-for="(img,i) of value"
+          :key="i"
+          :width="100"
+          :src="privateBucket ? img.content : img.url" />
       </template>
       <i-upload
         v-if="maxLength > value.length"
@@ -14,14 +18,14 @@
         :up-txt="upTxt"
         :multiple="multiple"
         :max-length="maxLength"
-        :disabled="disabled" />
-
+        :disabled="disabled"
+        @upload="afterUpload" />
       <!-- 文件上传 -->
-      <template v-if="file.type === 'file'">
-        <div>
+      <template v-if="mediaType === 'file'">
+        <div v-for="(f,i) of value" :key="i" class="">
           <i class="iconfont icon-watt-delete"></i>
           <i class="iconfont icon-watt-attachment"></i>
-          <span></span>
+          <span>{{f.name}}</span>
         </div>
       </template>
     </div>
@@ -41,11 +45,12 @@
   </div>
 </template>
 <script>
-import { ref, defineComponent } from 'vue'
+import { ref, defineComponent, toRefs } from 'vue'
 import IUpload from './upload.vue'
 export default defineComponent({
   name: 'watt-upload',
   components: { IUpload },
+  emits: ['input'],
   props: {
     value: {
       type: Array,
@@ -61,6 +66,9 @@ export default defineComponent({
     upTxt: {
       type: String
     },
+    tipTxt: {
+      type: String
+    },
     fileRules: {
       type: Object,
       default: () => ({})
@@ -69,27 +77,40 @@ export default defineComponent({
       type: Number,
       default: 1
     },
-    verify: {
+    privateBucket: {
       type: Boolean
-    },
-    disabledInfo: {
-      type: Boolean
-    },
-    upTxt: {
-      type: String,
-      default: '上传图片'
-    },
-    tipTxt: {
-      type: String
-    },
+    }
   },
   setup (props, {emit}) {
-    console.log(ref)
+    const { privateBucket, upTxt, mediaType } = toRefs(props)
     const msg = ref('')
+
+    const afterUpload = (data) => {
+      console.log(data)
+      emit('input', data)
+    }
     return {
+      privateBucket,
       msg,
+      mediaType,
       upTxt: upTxt.value || (upTxt.value === undefined ? (mediaType.value === 'image'? '上传图片' : '上传文件') : ''),
+      afterUpload
     }
   }
 })
 </script>
+<style lang="less" scoped>
+
+.upload-image {
+  .c-wrap {
+    .ant-image {
+      display: inline-block;
+      margin-left: 8px;
+      vertical-align: top;
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+</style>

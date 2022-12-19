@@ -164,7 +164,6 @@ export default defineComponent({
       loading.value = true
       Promise.all(uploadQueues)
         .then((data) => {
-          console.log(data)
           loading.value = false
           emit('upload', data)
           uploaded()

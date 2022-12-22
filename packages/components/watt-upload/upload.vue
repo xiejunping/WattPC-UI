@@ -177,7 +177,8 @@ export default defineComponent({
     const handleClick = () => {
       if (disabled.value) return
       input.value.click()
-      erropStat.value = false
+      erropStat.value = false // 重置错误状态
+      emit('error', '')
     }
     const onChange = (event) => {
       let { files } = event.target
@@ -234,6 +235,7 @@ export default defineComponent({
     }
     &.itemimage {
       flex-direction: column;
+      text-align: center;
       width: 100px;
       height: 100px;
       i {
@@ -292,6 +294,7 @@ export default defineComponent({
       flex-direction: column;
       justify-content: center;
       align-content: center;
+      text-align: center;
       width: 100px;
       height: 100px;
       background-color: #f8f8f8;
@@ -300,8 +303,6 @@ export default defineComponent({
         line-height: 20px;
       }
     }
-
-
   }
   .w-input {
     visibility: hidden;

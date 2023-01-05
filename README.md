@@ -8,6 +8,8 @@ Watt-framework
 
 #### 使用说明
 
+全局引入方式，与其他的包一样进行引用
+
 ```js
 import WattPCUI from 'wattpc-ui'
 import 'wattpc-ui/dist/style.css'

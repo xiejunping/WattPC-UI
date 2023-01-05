@@ -92,12 +92,15 @@ export default defineComponent({
       type: Number,
       default: 1
     },
+    disabled: {
+      type: Boolean
+    },
     privateBucket: {
       type: Boolean
     }
   },
   setup (props, {emit}) {
-    const { modelValue, privateBucket, upTxt, mediaType, fileRules, accept, multiple, maxLength, busType } = toRefs(props)
+    const { modelValue, privateBucket, upTxt, mediaType, fileRules, accept, multiple, maxLength, disabled, busType } = toRefs(props)
     const msg = ref('')
     const rulesTxt = computed(() => {
       let txt = []
@@ -131,6 +134,7 @@ export default defineComponent({
       accept,
       multiple,
       maxLength,
+      disabled,
       busType,
       upTxt: upTxt.value || (upTxt.value === undefined ? (mediaType.value === 'image'? '上传图片' : '上传文件') : ''),
       rulesTxt,

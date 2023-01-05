@@ -1,7 +1,10 @@
 # watt-pc-ui
 
+Watt-framework 
 #### 介绍
-瓦特（WATT）开发自用UI库，PC端
+瓦特（WATT）开发自用UI库，PC端内的UI组件库，只为PC端适配，尽少控制包体大小，能快速适用于watt内部产品的使用。
+
+
 
 #### 使用说明
 

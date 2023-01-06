@@ -158,6 +158,7 @@ export default defineComponent({
             rawFile.height = height
             rawFile.url = `https://static.jsvue.cn/${key}`
             rawFile.content = URL.createObjectURL(base64ToBlob(content))
+            delete rawFile.file
             return rawFile
           })
       })

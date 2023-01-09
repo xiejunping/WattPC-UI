@@ -1,2 +1,2 @@
 export { default as Peach } from './peach'
-import { default as Mark } from './mark'
+export { default as Mark } from './mark'

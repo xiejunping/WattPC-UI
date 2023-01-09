@@ -1,6 +1,6 @@
 {
   "name": "wattpc-ui",
-  "version": "0.0.1-beta.4",
+  "version": "0.0.1-beta.5",
   "description": "watt-framework 内的UI组件库，只为PC端适配，尽少控制包体大小，能快速适用于watt内部产品的使用。",
   "main": "dist/wattpc-ui.js",
   "type": "module",

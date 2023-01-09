@@ -1,5 +1,7 @@
 export * from './components'
 import * as components from './components'
+export * from './directives'
+import * as directives from './directives'
 import './css/iconfont.css'
 
 const PcWattUI = {
@@ -11,6 +13,11 @@ const install = (app, opts = {}) => {
 
   Object.keys(PcWattUI).forEach(key => {
     app.component(key, PcWattUI[key]);
+  })
+
+  // 加载指令
+  Object.keys(directives).forEach(key => {
+    app.directive(key, directives[key]);
   })
 }
 

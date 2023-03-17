@@ -25,3 +25,9 @@ import { WattUpload } from 'wattpc-ui'
 
 </script>
 ```
+
+### 优化
+
+iconfont 字体用自已的cdn（阿里不让用），减小包的体积
+
+//static.jsvue.cn//common/css/font_3824242_44szmkjzzcn.css

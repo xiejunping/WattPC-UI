@@ -17,12 +17,42 @@ Vue.use(WattPCUI)
 ```
 
 #### 按需引入
-在vue3 中使用
+在vue3 中使用, 可以在.vue的页面组件或组件中使用
 
 ```js
 <script setup>
 import { WattUpload } from 'wattpc-ui'
 
+</script>
+```
+
+在vue3 中api components 方式
+
+```vue
+<template>
+    <div>
+        <watt-upload 
+            v-model="bannerFile" 
+            :bus-type="6" 
+            :max-length="1" 
+            :file-rules="{ width: 1280, height: 400 }" 
+            media-type="image" 
+            accept="image/*" />
+    </div>
+</template>
+<script>
+import { ref } from 'vue'
+import { WattUpload } from 'wattpc-ui'
+
+export default {
+    components: { WattUpload }
+    setup() {
+        const bannerFile = ref([])
+        return {
+            bannerFile
+        }
+    }
+}
 </script>
 ```
 

@@ -19,10 +19,21 @@ Vue.use(WattPCUI)
 #### 按需引入
 在vue3 中使用, 可以在.vue的页面组件或组件中使用
 
-```js
+```vue
 <script setup>
+import { createApp } from 'vue'
+import App from './App.vue'
 import { WattUpload } from 'wattpc-ui'
+import 'wattpc-ui/dist/style.css'
 
+const app = createApp(App)
+
+const WattUI = { WattUpload }
+Object.keys(WattUI).forEach(key => {
+    app.component(key, WattUI[key])
+})
+
+app.mount('#app')
 </script>
 ```
 
@@ -43,6 +54,7 @@ import { WattUpload } from 'wattpc-ui'
 <script>
 import { ref } from 'vue'
 import { WattUpload } from 'wattpc-ui'
+import 'wattpc-ui/dist/style.css'
 
 export default {
     components: { WattUpload }

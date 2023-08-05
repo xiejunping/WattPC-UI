@@ -15,7 +15,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: './packages/index.js',
-      name: 'wattpc-ui'
+      name: 'wattpc-ui',
+      fileName: format => `wattpc-ui.${format}.js`
     },
     rollupOptions: {
       external: ['vue', 'axios', 'js-cookie'],
